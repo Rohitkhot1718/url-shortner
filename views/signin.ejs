@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-In</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- <link rel="shortcut icon" href="/img/url-shortner.png" type="image/x-icon"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Sign-In</h1>
+        <% if (commonError) { %>
+            <p class="error common-error"><%= commonError %></p>
+        <% } %>
+        <form action="/auth/signin" method="POST">
+            <div>
+                <input type="email" id="email" name="email" placeholder="Email"
+                class="<%= field === 'email' ?'input-error':'' %>" required>
+                <p class="error" id="emailError"><%= field === 'email'? errorMessage : '' %></p>
+            </div>
+            <div>
+                <input type="password" id="password" name="password" placeholder="Password"
+                class="<%= field === 'password' ?'input-error':'' %>" required>
+                <p class="error" id="passwordError"><%= field === 'password'? errorMessage : '' %></p>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+        <a href="/signup">Don't have an account? Sign Up</a>
+    </div>
+    <script>
+        function clearError(inputId, errorId) {
+            const input = document.getElementById(inputId)
+            const emailError = document.getElementById(errorId)
+
+            input.addEventListener('input', ()=>{
+                input.classList.remove('input-error')
+                if(emailError) emailError.textContent = ''
+            }) 
+        }
+        clearError('email', 'emailError')
+        clearError('password', 'passwordError')
+        
+    </script>
+</body>
+</html>

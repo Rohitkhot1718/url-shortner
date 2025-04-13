@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener - Home</title>
+    <link rel="stylesheet" href="css/home.css">
+    <!-- <link rel="shortcut icon" href="/img/url-shortner.png" type="image/x-icon"> -->
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/">
+            <img src="/img/url-shortner.png" alt="url-shortner" width="25px">
+            <div>URL Shortener</div>
+            </a>
+        </div>
+        <div class="route">
+        <a href="/">Home</a>
+        <% if (user) { %>
+            <a href="/auth/signout">Logout</a>
+        <% } else { %>
+            <a href="/signin">Sign In</a>
+            <a href="/signup">Sign Up</a>
+        <% } %>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Welcome to URL Shortener  <%= user ? user.username : '' %></h1>
+        <p>Shorten your long URLs and share them easily.</p>
+        <button class="btn" id="startBtn">Get Started</button>
+    </div>
+    <script>
+        const user = true
+        document.getElementById("startBtn").addEventListener("click", function() {
+            window.location.href = user ? "/url" : "/signin";
+        });
+    </script>
+</body>
+</html>
